@@ -1,7 +1,9 @@
 import React, { useEffect } from "react"
 import { Route, Routes } from "react-router-dom"
 import { useDispatch } from "react-redux"
+
 import { getCategories } from "../../features/categories/categoriesSlice"
+import { getProducts } from "../../features/products/productsSlice"
 
 import Home from "../Home/Home"
 import Header from "../Header/Header"
@@ -12,13 +14,14 @@ const App = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getCategories())
+    dispatch(getProducts())
   }, [dispatch])
 
   return (
     <div className="app">
       <Header />
       <div className="container">
-        <Sidebar />
+        <Sidebar amount={7} />
         <Routes>
           <Route index element={<Home />} />
         </Routes>
