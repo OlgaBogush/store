@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router"
 
 import { useGetProductQuery } from "../../features/api/apiSlice"
 import { ROUTES } from "../../utils/routes"
+import Product from "./Product"
 
 const SingleProduct = () => {
   const { id } = useParams()
@@ -16,7 +17,14 @@ const SingleProduct = () => {
     // eslint-disable-next-line
   }, [isLoading, isFetching, isSuccess])
 
-  return <div>SingleProduct</div>
+  return !data ? (
+     <section className="preloader">Loading...</section>
+   ) : (
+     <>
+       <Product {...data} />
+     </>
+   )
+  
 }
 
 export default SingleProduct
