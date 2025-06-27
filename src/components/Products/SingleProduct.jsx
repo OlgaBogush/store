@@ -4,8 +4,12 @@ import { useNavigate, useParams } from "react-router"
 import { useGetProductQuery } from "../../features/api/apiSlice"
 import { ROUTES } from "../../utils/routes"
 import Product from "./Product"
+import Products from "./Products"
+import { useDispatch, useSelector } from "react-redux"
+import { getRelatedProducts } from "../../features/products/productsSlice"
 
 const SingleProduct = () => {
+  const dispatch = useDispatch()
   const { id } = useParams()
   const navigate = useNavigate()
   const { data, isLoading, isFetching, isSuccess } = useGetProductQuery({ id })
@@ -17,14 +21,21 @@ const SingleProduct = () => {
     // eslint-disable-next-line
   }, [isLoading, isFetching, isSuccess])
 
+  const { list, related } = useSelector(({ products }) => products)
+
+  useEffect(() => {
+    if (!data || !list.length) return
+    dispatch(getRelatedProducts(data.category.id))
+  }, [dispatch, data, list.length])
+
   return !data ? (
-     <section className="preloader">Loading...</section>
-   ) : (
-     <>
-       <Product {...data} />
-     </>
-   )
-  
+    <section className="preloader">Loading...</section>
+  ) : (
+    <>
+      <Product {...data} />
+      <Products title="Related products" products={related} amount={5} />
+    </>
+  )
 }
 
 export default SingleProduct
