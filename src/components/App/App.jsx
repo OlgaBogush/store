@@ -11,6 +11,8 @@ import Header from "../Header/Header"
 import Footer from "../Footer/Footer"
 import Sidebar from "../Sidebar/Sidebar"
 import SingleProduct from "../Products/SingleProduct"
+import UserForm from "../User/UserForm"
+import Profile from "../Profile/Profile"
 
 const App = () => {
   const dispatch = useDispatch()
@@ -22,11 +24,13 @@ const App = () => {
   return (
     <div className="app">
       <Header />
+      <UserForm />
       <div className="container">
         <Sidebar amount={7} />
         <Routes>
           <Route index element={<Home />} />
           <Route path={ROUTES.PRODUCT} element={<SingleProduct />} />
+          <Route path={ROUTES.PROFILE} element={<Profile />} />
         </Routes>
       </div>
       <Footer />
