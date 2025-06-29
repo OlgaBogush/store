@@ -14,6 +14,7 @@ import SingleProduct from "../Products/SingleProduct"
 import UserForm from "../User/UserForm"
 import Profile from "../Profile/Profile"
 import SingleCategory from "../Categories/SingleCategory"
+import Cart from "../Cart/Cart"
 
 const App = () => {
   const dispatch = useDispatch()
@@ -33,6 +34,7 @@ const App = () => {
           <Route path={ROUTES.PRODUCT} element={<SingleProduct />} />
           <Route path={ROUTES.PROFILE} element={<Profile />} />
           <Route path={ROUTES.CATEGORY} element={<SingleCategory />} />
+          <Route path={ROUTES.CART} element={<Cart />} />
         </Routes>
       </div>
       <Footer />
